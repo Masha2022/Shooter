@@ -15,6 +15,7 @@ public class EnemyСreater : MonoBehaviour
     [SerializeField] private int _health = 50;
     private int _randomRadius = 30;
     private List<GameObject> _enemies = new List<GameObject>();
+    
     [SerializeField] public int _startCountEnemies = 5;
 
     private void Start()
@@ -36,7 +37,7 @@ public class EnemyСreater : MonoBehaviour
 
     private void Update()
     {
-        ChangedCountEnemies();
+       ChangedCountEnemies();
     }
 
     public void ChangedCountEnemies()
@@ -48,11 +49,6 @@ public class EnemyСreater : MonoBehaviour
                 _enemies.Remove(_enemies[i]);
                 GameManager.SendEnemyKilled(_enemies.Count);
             }
-        }
-
-        if (_enemies.Count == 0)
-        {
-            CreateNewEnemy();
         }
     }
 

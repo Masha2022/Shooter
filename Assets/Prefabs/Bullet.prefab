@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 378002989428384705}
   - component: {fileID: -497916462308964491}
   - component: {fileID: -4077054485767570881}
-  - component: {fileID: 7060448599026341385}
+  - component: {fileID: 2589359070012053374}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Pool
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bulllet: {fileID: 8763534697658990656}
---- !u!95 &7060448599026341385
+--- !u!95 &2589359070012053374
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -139,7 +139,7 @@ Animator:
   m_GameObject: {fileID: 8763534697658990656}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9e9fab59a62f8ef4f983a76808611b7b, type: 2}
+  m_Controller: {fileID: 9100000, guid: c6363fa4a62554d4f9d8d3f7d3d299e1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

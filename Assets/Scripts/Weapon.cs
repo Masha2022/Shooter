@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 public class Weapon : MonoBehaviour
 {
-    public Action<int> ShootEvent; 
+    public Action<int> ShootEvent; // для хранения количества пуль
     public int BulletsCount { get; private set; }
 
     [SerializeField] private GameObject _bulletPrefab;
