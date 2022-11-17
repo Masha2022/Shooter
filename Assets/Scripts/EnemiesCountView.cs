@@ -12,12 +12,6 @@ public class EnemiesCountView : MonoBehaviour
    [SerializeField] private EnemyСreater _enemyController;
    private int _countAliveEnemies;
    
-   private void Awake()
-   {
-       _enemyController.DecreaseEnemiesEvent += EnemiesAlive;
-      // _enemyController.DecreaseEnemiesEvent +=Initialize;
-   }
-   
    private void EnemiesAlive(int aliveEnemy)
    {
        //Initialize( aliveEnemy);
@@ -33,6 +27,7 @@ public class EnemiesCountView : MonoBehaviour
 
    public void Initialize(int enemyAlive)
    {
+       _enemyController.DecreaseEnemiesEvent += EnemiesAlive;
        _countAliveEnemies = enemyAlive;
        Debug.Log("EnemiesCountView, _countAliveEnemies = "+_countAliveEnemies);
        Debug.Log("EnemiesCountView, enemyAlive = "+enemyAlive);
