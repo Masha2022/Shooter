@@ -17,14 +17,7 @@ public class EnemyСreater : MonoBehaviour
     [SerializeField] private int _health = 50;
     private int _randomRadius = 30;
     private List<GameObject> _enemies = new List<GameObject>();
-    
-    
-
-    private void Awake()
-    {
-        _enemyDied.EnemyDiedEvent += ChangedCountEnemies;
-    }
-
+   
     private void Start()
     {
         CreateNewEnemy();
@@ -37,7 +30,7 @@ public class EnemyСreater : MonoBehaviour
             var enemy = Instantiate(_enemyPrefab);
             SetEnemyPosition(enemy);
             enemy.GetComponent<MoveHandlerEnemy>().Initialize(_player);
-            enemy.GetComponent<EnemyDestroy>().InitializeHealth(_health, _enemyDied.EnemyDiedEvent);
+            enemy.GetComponent<EnemyDestroy>().InitializeHealth(_health, ChangedCountEnemies);
             _enemies.Add(enemy);
         }
     }
