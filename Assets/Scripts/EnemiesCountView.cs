@@ -14,6 +14,7 @@ public class EnemiesCountView : MonoBehaviour
    
    private void EnemiesAlive(int aliveEnemy)
    {
+       Debug.Log("EnemiesCountView, aliveEnemy = "+aliveEnemy);
        _images[aliveEnemy-1].enabled = false;
        if (aliveEnemy == 0)
        {
