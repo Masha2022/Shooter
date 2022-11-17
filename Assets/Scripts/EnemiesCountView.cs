@@ -14,7 +14,6 @@ public class EnemiesCountView : MonoBehaviour
    
    private void EnemiesAlive(int aliveEnemy)
    {
-       //Initialize( aliveEnemy);
        _images[aliveEnemy-1].enabled = false;
        if (aliveEnemy == 0)
        {
