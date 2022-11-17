@@ -9,15 +9,20 @@ public class EnemiesCountView : MonoBehaviour
 {
 
    [SerializeField] private Image[] _images = new Image[5];
+   [SerializeField] private EnemyСreater _enemyController;
+   private int _countAliveEnemies;
+   
    private void Awake()
    {
-       GameManager.OnEnemyKilled.AddListener(EnemyKilled);
+       _enemyController.DecreaseEnemiesEvent += EnemiesAlive;
+      // _enemyController.DecreaseEnemiesEvent +=Initialize;
    }
-
-   private void EnemyKilled(int killedEnemy)
+   
+   private void EnemiesAlive(int aliveEnemy)
    {
-       _images[ killedEnemy].enabled = false;
-       if (killedEnemy == 0)
+       //Initialize( aliveEnemy);
+       _images[aliveEnemy-1].enabled = false;
+       if (aliveEnemy == 0)
        {
            foreach (var image in _images)
            {
@@ -26,4 +31,10 @@ public class EnemiesCountView : MonoBehaviour
        }
    }
 
+   public void Initialize(int enemyAlive)
+   {
+       _countAliveEnemies = enemyAlive;
+       Debug.Log("EnemiesCountView, _countAliveEnemies = "+_countAliveEnemies);
+       Debug.Log("EnemiesCountView, enemyAlive = "+enemyAlive);
+   }
 }

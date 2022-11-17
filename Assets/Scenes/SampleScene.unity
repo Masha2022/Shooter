@@ -225,12 +225,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce7f5741c8507f4fa544b65e7218f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyDied: {fileID: 3242221397738375933, guid: 0c967ae1c4a172941ab66633e7b64863, type: 3}
+  _startCountEnemies: 5
   _enemyPrefab: {fileID: 8678071265587490907, guid: 0c967ae1c4a172941ab66633e7b64863, type: 3}
   _player: {fileID: 1995683106}
-  Health: 50
-  _startCountEnemies: 5
-  _enemy: {fileID: 3242221397738375933, guid: 0c967ae1c4a172941ab66633e7b64863, type: 3}
-  _enemies: []
+  _health: 50
 --- !u!4 &142978057
 Transform:
   m_ObjectHideFlags: 0
@@ -860,7 +859,7 @@ MonoBehaviour:
   _bulletCountView: {fileID: 1987301103}
   _weaponsController: {fileID: 1995683110}
   _enemiesCountView: {fileID: 1987301102}
-  _enemyDestroy: {fileID: 142978056}
+  _enemyDied: {fileID: 142978056}
 --- !u!114 &1202027732 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2021333709026884430, guid: 046074f73cf37f24f9d6f1d69a2333f6, type: 3}
@@ -1293,7 +1292,7 @@ MonoBehaviour:
   - {fileID: 919366003}
   - {fileID: 1283382493}
   - {fileID: 1842727992}
-  test: {fileID: 0}
+  _enemyController: {fileID: 142978056}
 --- !u!114 &1987301103
 MonoBehaviour:
   m_ObjectHideFlags: 0

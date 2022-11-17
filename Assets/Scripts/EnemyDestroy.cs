@@ -7,6 +7,7 @@ public class EnemyDestroy : MonoBehaviour
     public Action  EnemyDiedEvent;
     
     [SerializeField] private GameObject _enemy;
+    [SerializeField] private int _damage = 50;
     private Material _material;
     private Color _color;
     private int _healthEnemy;
@@ -15,22 +16,25 @@ public class EnemyDestroy : MonoBehaviour
     {
         if (other.CompareTag("Pool"))
         {
-            if (_healthEnemy >= 0)
+            if (_healthEnemy > 0)
             {
-                _healthEnemy -= 50;
+                _healthEnemy -= _damage;
                 _color = Random.ColorHSV(0f, 1f, 0.7f, 1f, 1f, 1f);
                 GetComponent<Renderer>().material.color = _color;
                 return;
             }
-            if (_healthEnemy < 0)
+            if (_healthEnemy <= 0)
             {
+                Debug.Log("EnemyDestroy, Destroy(_enemy)");
+                EnemyDiedEvent?.Invoke();
                 Destroy(_enemy);
             }
         }
     }
 
-    public void InitializeHealth(int health)
+    public void InitializeHealth(int health, Action enemyDiedEvent)
     {
+       EnemyDiedEvent = enemyDiedEvent;
         _healthEnemy = health;
     }
 }
