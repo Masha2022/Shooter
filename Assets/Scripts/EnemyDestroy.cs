@@ -4,14 +4,14 @@ using Random = UnityEngine.Random;
 
 public class EnemyDestroy : MonoBehaviour
 {
-    public Action  EnemyDiedEvent;
-    
+    public Action<GameObject> EnemyDiedEvent;
+
     [SerializeField] private GameObject _enemy;
     [SerializeField] private int _damage = 50;
     private Material _material;
     private Color _color;
     private int _healthEnemy;
-    
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Pool"))
@@ -23,18 +23,19 @@ public class EnemyDestroy : MonoBehaviour
                 GetComponent<Renderer>().material.color = _color;
                 return;
             }
+
             if (_healthEnemy <= 0)
             {
                 Debug.Log("EnemyDestroy, Destroy(_enemy)");
-                EnemyDiedEvent?.Invoke();
                 Destroy(_enemy);
+                EnemyDiedEvent?.Invoke(_enemy);
             }
         }
     }
 
-    public void InitializeHealth(int health, Action enemyDiedEvent)
+    public void InitializeHealth(int health, Action<GameObject> enemyDiedEvent)
     {
-       EnemyDiedEvent = enemyDiedEvent;
+        EnemyDiedEvent = enemyDiedEvent;
         _healthEnemy = health;
     }
 }

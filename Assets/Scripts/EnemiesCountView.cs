@@ -12,16 +12,12 @@ public class EnemiesCountView : MonoBehaviour
    [SerializeField] private EnemyСreater _enemyController;
    private int _countAliveEnemies;
 
-   private void EnemiesAlive(int aliveEnemy)
+   private void EnemiesAlive(int countAliveEnemy)
    {
-       Debug.Log("EnemiesCountView, aliveEnemy = "+aliveEnemy);
-       _images[aliveEnemy].enabled = false;
-       if (aliveEnemy == 0)
+       Debug.Log("EnemiesCountView, countAliveEnemy = "+countAliveEnemy);
+       for (var enemyIndex = 0; enemyIndex < _images.Length; enemyIndex++)
        {
-           foreach (var image in _images)
-           {
-               image.enabled = true;
-           }
+           _images[enemyIndex].enabled = enemyIndex < countAliveEnemy;
        }
    }
 

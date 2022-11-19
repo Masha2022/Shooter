@@ -9,15 +9,15 @@ using Random = UnityEngine.Random;
 public class EnemyСreater : MonoBehaviour
 {
     public Action<int> DecreaseEnemiesEvent;
-    [SerializeField]public EnemyDestroy _enemyDied;
+    [SerializeField] public EnemyDestroy _enemyDied;
     [SerializeField] public int _startCountEnemies = 5;
-    
+
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private MoveHandlerPlayer _player;
     [SerializeField] private int _health = 50;
     private int _randomRadius = -30;
     private List<GameObject> _enemies = new List<GameObject>();
-    
+
     private void Start()
     {
         CreateNewEnemy();
@@ -28,34 +28,24 @@ public class EnemyСreater : MonoBehaviour
         for (int i = 0; i < _startCountEnemies; i++)
         {
             var enemy = Instantiate(_enemyPrefab);
-            
+
             SetEnemyPosition(enemy);
             enemy.GetComponent<MoveHandlerEnemy>().Initialize(_player);
-            enemy.GetComponent<EnemyDestroy>().InitializeHealth(_health, ChangedCountEnemies);
+            enemy.GetComponent<EnemyDestroy>().InitializeHealth(_health, OnenemyDied);
             _enemies.Add(enemy);
         }
     }
 
-    public void ChangedCountEnemies()
+    public void OnenemyDied(GameObject enemy)
     {
-        for (var i = 0; i < _enemies.Count; i++)
-        {
-            if (_enemies[i] == null)
-            {
-                _enemies.Remove(_enemies[i]);
-                _startCountEnemies--;
-                DecreaseEnemiesEvent?.Invoke(_startCountEnemies);
-                Debug.Log("EnemyСreater _startCountEnemies ="+ (_startCountEnemies));
-            }
-        }
-
+        _enemies.Remove(enemy);
+        DecreaseEnemiesEvent?.Invoke(_enemies.Count);
         if (_enemies.Count == 0)
         {
             _startCountEnemies = 5;
             DecreaseEnemiesEvent?.Invoke(_startCountEnemies);
             CreateNewEnemy();
         }
-        
     }
 
     private void SetEnemyPosition(GameObject enemy)
