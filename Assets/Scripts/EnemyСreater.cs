@@ -9,14 +9,21 @@ using Random = UnityEngine.Random;
 public class EnemyСreater : MonoBehaviour
 {
     public Action<int> DecreaseEnemiesEvent;
-    [SerializeField] public EnemyDestroy _enemyDied;
+    [SerializeField]public EnemyDestroy _enemyDied;
     [SerializeField] public int _startCountEnemies = 5;
-
+    
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private MoveHandlerPlayer _player;
     [SerializeField] private int _health = 50;
-    private int _randomRadius = -30;
+    private int _randomRadius = 30;
     private List<GameObject> _enemies = new List<GameObject>();
+    
+    
+
+    private void Awake()
+    {
+        _enemyDied.EnemyDiedEvent += ChangedCountEnemies;
+    }
 
     private void Start()
     {
@@ -28,24 +35,33 @@ public class EnemyСreater : MonoBehaviour
         for (int i = 0; i < _startCountEnemies; i++)
         {
             var enemy = Instantiate(_enemyPrefab);
-
             SetEnemyPosition(enemy);
             enemy.GetComponent<MoveHandlerEnemy>().Initialize(_player);
-            enemy.GetComponent<EnemyDestroy>().InitializeHealth(_health, OnenemyDied);
+            enemy.GetComponent<EnemyDestroy>().InitializeHealth(_health, _enemyDied.EnemyDiedEvent);
             _enemies.Add(enemy);
         }
     }
 
-    public void OnenemyDied(GameObject enemy)
+    public void ChangedCountEnemies()
     {
-        _enemies.Remove(enemy);
-        DecreaseEnemiesEvent?.Invoke(_enemies.Count);
+        for (var i = 0; i < _enemies.Count; i++)
+        {
+            if (_enemies[i] == null)
+            {
+                _enemies.Remove(_enemies[i]);
+                _startCountEnemies--;
+                DecreaseEnemiesEvent?.Invoke(_startCountEnemies);
+                Debug.Log("EnemyСreater _startCountEnemies ="+ (_startCountEnemies));
+            }
+        }
+
         if (_enemies.Count == 0)
         {
             _startCountEnemies = 5;
             DecreaseEnemiesEvent?.Invoke(_startCountEnemies);
             CreateNewEnemy();
         }
+        
     }
 
     private void SetEnemyPosition(GameObject enemy)
